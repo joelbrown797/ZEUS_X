@@ -34,7 +34,7 @@ async function startBot() {
       console.log(`botName connecté avec succès ¡)
     )
 
-  sock.ev.on('messages.upsert', async ( messages, type ) => 
+  sock.ev.on('messages.upsert', async ( messages, type ) => {
     if(type !== 'notify') return
     const msg = messages[0]
     if(!msg.message || msg.key.fromMe) return
@@ -54,6 +54,15 @@ async function startBot() {
       await sock.sendMessage(msg.key.remoteJid, { text: `Commande inconnue : ${command}` })
     }
   })
-}
-
+sock.ev.on('messages.update', async (updates) => {
+  for (const update of updates) {
+    if (update.messageStubType === 68 && update.key && !update.key.fromMe) {
+      const jid = update.key.remoteJid
+      const sender = update.key.participant || jid
+      await sock.sendMessage(jid, {
+        text: `🛑 *Message supprimé détecté*\n👤 De: ${sender}`
+      })
+    }
+  }
+})
 startBot()
