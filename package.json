@@ -1,1 +1,19 @@
 
+{
+  "name": "zeus_x",
+  "version": "1.0.0",
+  "description": "Bot WhatsApp ZEUS_X",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "joelbrown797",
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "dotenv": "^16.0.3",
+    "fs-extra": "^11.1.1",
+    "pino": "^8.0.0"
+  }
+}
+
